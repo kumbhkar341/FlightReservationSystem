@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans">
+
+<context:component-scan base-package="com.frs.controller"/>
+
+
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+
+<property value="/" name="prefix"/>
+
+<property value=".jsp" name="suffix"/>
+
+</bean>
+
+
+<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="ds">
+
+<property value="com.mysql.jdbc.Driver" name="driverClassName"/>
+
+<property value="jdbc:mysql://localhost:3306/frstest1" name="url"/>
+
+<property value="root" name="username"/>
+
+<property value="root" name="password"/>
+
+</bean>
+
+<bean class="org.springframework.jdbc.core.JdbcTemplate" id="jt">
+
+<property name="dataSource" ref="ds"/>
+
+</bean>
+
+
+<bean class="com.frs.dao.FlightDao" id="dao">
+
+<property name="template" ref="jt"/>
+
+</bean>
+
+
+<bean class="com.frs.dao.RouteDao" id="rdao">
+
+<property name="template" ref="jt"/>
+
+</bean>
+
+
+<bean class="com.frs.dao.ScheduleDao" id="sdao">
+
+<property name="template" ref="jt"/>
+
+</bean>
+
+
+<bean class="com.frs.dao.ProfileDao" id="prodao">
+
+<property name="template" ref="jt"/>
+
+</bean>
+
+<bean class="com.frs.util.DbUtil" id="db">
+
+<property name="template" ref="jt"/>
+
+</bean>
+
+<bean class="com.frs.dao.CredentialsDao" id="creddao">
+
+<property name="template" ref="jt"/>
+
+</bean>
+
+
+<bean class="com.frs.dao.PassengerDao" id="passddao">
+
+<property name="template" ref="jt"/>
+
+</bean>
+
+
+<bean class="com.frs.dao.CreditCardDao" id="creditddao">
+
+<property name="template" ref="jt"/>
+
+</bean>
+
+
+<bean class="com.frs.dao.ReservationDao" id="rsdao">
+
+<property name="template" ref="jt"/>
+
+</bean>
+
+
+<bean class="com.frs.dao.AdminPassengerDao" id="residao">
+
+<property name="template" ref="jt"/>
+
+</bean>
+
+
+<bean class="com.frs.dao.ViewCustomerDao" id="frdao">
+
+<property name="template" ref="jt"/>
+
+</bean>
+
+<mvc:annotation-driven/>
+
+</beans>
